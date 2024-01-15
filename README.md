@@ -6,3 +6,6 @@ The game isn't case sensitive and allows leading spaces, so for example any of t
 * scisSORS
 * SCISSORS
 * ScIsSors
+
+The page can be accesed here:
+https://dot-sky.github.io/rock-paper-scissors/

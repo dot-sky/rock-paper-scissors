@@ -22,6 +22,14 @@ function capitalize(text){
         return text;
     return text.at(0).toUpperCase() + text.slice(1).toLowerCase();
 }
+function getUserInput(){
+    text = capitalize(prompt("Rock, Paper, Scissors!").trim());
+    while(text != "Rock" && text != "Paper" && text != "Scissors"){
+        alert("Invalid choice, try again...");
+        text = capitalize(prompt("Rock, Paper, Scissors!").trim());
+    }
+    return text;
+}
 function evaluateChoices(playerSelection, computerSelection){
     if (playerSelection === computerSelection){
         return 0;
@@ -38,7 +46,7 @@ function evaluateChoices(playerSelection, computerSelection){
 function gameRound(){
     let result = 0, playerSelection, computerSelection;
     do {
-        playerSelection = capitalize(prompt("Your choice!"));
+        playerSelection = getUserInput();
         computerSelection = getComputerChoice();
         result = evaluateChoices(playerSelection, computerSelection);
         if (!result){
@@ -59,10 +67,13 @@ function game(){
     let computerPoints = 0;
     for (let round = 1; round <= 5; round++) {
         console.log("---- Round: " + round + " ----");
-        if (gameRound() === 1)
+        if (gameRound() === 1){
             playerPoints++;
-        else
+        }
+        else{
             computerPoints++;
+        }
+        round = (playerPoints > 2 || computerPoints > 2) ? 5 : round;
     }
     console.log("");
     console.log("==== The final winner is..." + " ====");
@@ -76,4 +87,3 @@ function game(){
     console.log(" > Computer points: "+ computerPoints);
 }
 game();
-  

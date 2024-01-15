@@ -17,11 +17,11 @@ function getComputerChoice(){
 function getRandomNumber(upperLimit){
     return Math.floor(Math.random()*upperLimit) + 1;
 }
-function playRound(playerSelection, computerSelection){
+function evaluateChoices(playerSelection, computerSelection){
     playerSelection = capitalize(playerSelection);
     console.log("You've selected " + playerSelection)
     if (playerSelection === computerSelection){
-        return "It's a tie!"
+        return "It's a tie!";
     }
     else if ((playerSelection === "Rock" && computerSelection === "Scissors")
             || (playerSelection === "Scissors" && computerSelection === "Paper")
@@ -33,11 +33,18 @@ function playRound(playerSelection, computerSelection){
 
 }
 function capitalize(text){
+    if (text === "")
+        return text;
     return text.at(0).toUpperCase() + text.slice(1).toLowerCase();
 }
-function getPlayerSelection(){
+function gameRound(){
     let playerSelection = prompt("Your choice!");
-    const computerSelection = getComputerChoice();
-    console.log(playRound(playerSelection, computerSelection));
+    const computerSelection = "Rock";
+    const result = evaluateChoices(playerSelection, computerSelection);
+    console.log(result);
+    if (result === "It's a tie!"){
+        console.log("Both players selected " + playerSelection + ". Play again...");
+        gameRound();
+    }
 }
-getPlayerSelection();
+gameRound();

@@ -86,4 +86,47 @@ function game(){
     console.log(" > Player points: "+ playerPoints);
     console.log(" > Computer points: "+ computerPoints);
 }
-game();
+
+
+function showChoice(option){
+    console.log(option);
+    const imgOption = document.createElement("img");
+    switch(option){
+        case 0:
+            imgOption.src = "img/rock-128.png";
+            break;
+        case 1:
+            imgOption.src = "img/paper-128.png";
+            break;
+        case 2: 
+            imgOption.src = "img/scissors-128.png";
+            break;
+    }
+    imgOption.classList.add("img-display-large");
+    playerSelection.firstChild.remove();
+    playerSelection.appendChild(imgOption);
+}
+function getChoiceCode(choice){
+    if (choice === "rock-option"){
+        return 0;
+    }
+    else if (choice === "paper-option"){
+        return 1;
+    }
+    else if (choice === "scissors-option"){
+        return 2;
+    }
+    else{
+        return -1;
+    }
+}
+const optionButtons = document.querySelectorAll(".selection-list li");
+const playerSelection = document.querySelector(".player-choice");
+optionButtons.forEach(option => {
+    option.addEventListener("click", (event) => {
+        const playerChoice = getChoiceCode(event.currentTarget.className);
+        showChoice(playerChoice);
+    })
+});
+
+

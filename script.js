@@ -15,7 +15,8 @@ function getComputerChoice(){
     return gameChoice;
 }
 function getRandomNumber(upperLimit){
-    return Math.floor(Math.random()*upperLimit) + 1;
+    upperLimit++;
+    return Math.floor(Math.random()*upperLimit);
 }
 function capitalize(text){
     if (text === "")
@@ -88,7 +89,7 @@ function game(){
 }
 
 
-function showChoice(option){
+function displayChoice(playerPanel, option){
     console.log(option);
     const imgOption = document.createElement("img");
     switch(option){
@@ -103,8 +104,8 @@ function showChoice(option){
             break;
     }
     imgOption.classList.add("img-display-large");
-    playerSelection.firstChild.remove();
-    playerSelection.appendChild(imgOption);
+    playerPanel.firstChild.remove();
+    playerPanel.appendChild(imgOption);
 }
 function getChoiceCode(choice){
     if (choice === "rock-option"){
@@ -120,12 +121,19 @@ function getChoiceCode(choice){
         return -1;
     }
 }
+function startRound(playerChoice){
+    const computerChoice = getRandomNumber(2);
+    console.log("Computer: " + computerChoice);
+    displayChoice(computerPanel, computerChoice);
+}
 const optionButtons = document.querySelectorAll(".selection-list li");
-const playerSelection = document.querySelector(".player-choice");
+const playerPanel = document.querySelector(".player-choice");
+const computerPanel = document.querySelector(".computer-choice");
 optionButtons.forEach(option => {
     option.addEventListener("click", (event) => {
         const playerChoice = getChoiceCode(event.currentTarget.className);
-        showChoice(playerChoice);
+        displayChoice(playerPanel, playerChoice);
+        startRound(playerChoice);
     })
 });
 

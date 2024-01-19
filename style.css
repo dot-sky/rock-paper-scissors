@@ -14,8 +14,8 @@ body{
     flex: 1 0 auto;
     padding: 16px;
 }
-.player-section{
-    background-color: rgb(169, 169, 169);/*rgb(149, 149, 149)*/
+.player-section{ 
+    background-color: rgb(169, 169, 169);/**/ 
 }
 .computer-section{
     background-color: rgb(163, 163, 163); /*rgb(163, 163, 163)*/
@@ -65,7 +65,7 @@ body{
 li{
     width: 64px;
     height: 64px;
-    background-color: rgb(226, 244, 203);
+    background-color: #FFEAA7;/* rgb(226, 244, 203);*/
     padding: 12px;
    
     border-radius: 6px;

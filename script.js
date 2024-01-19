@@ -9,7 +9,7 @@ function displayChoice(playerPanel, option){
             imgOption.src = "img/rock-128.png";
             break;
         case 1:
-            imgOption.src = "img/paper-128.png";
+            imgOption.src = "img/paper-s.png";
             break;
         case 2: 
             imgOption.src = "img/scissors-128.png";
@@ -40,21 +40,21 @@ function startRound(playerChoice){
     if (playerChoice === computerChoice){
         statePlayer.textContent = "DRAW";
         stateComputer.textContent = "DRAW";
-        playerSection.style.cssText = "background-color: rgb(147, 151, 230)"; 
-        computerSection.style.cssText = "background-color: rgb(166, 161, 243)";
+        playerSection.style.backgroundColor = ORANGE; 
+        computerSection.style.backgroundColor = ORANGE;
     }
     else if (playerChoice-1 === computerChoice || playerChoice === 0 && computerChoice === 2){
         statePlayer.textContent = "WIN";
         stateComputer.textContent = "LOSE";
-        playerSection.style.cssText = "background-color: rgb(151, 228, 142)"; 
-        computerSection.style.cssText = "background-color: rgb(228, 142, 142)";
+        playerSection.style.backgroundColor = GREEN;
+        computerSection.style.backgroundColor = RED;
         playerScore++;
         playerScoreLabel.textContent = "Score: " + playerScore;
     }else{
         statePlayer.textContent = "LOSE";
         stateComputer.textContent = "WIN";
-        playerSection.style.cssText = "background-color: rgb(228, 142, 142)"; 
-        computerSection.style.cssText = "background-color: rgb(151, 228, 142)"; 
+        playerSection.style.backgroundColor = RED; 
+        computerSection.style.backgroundColor = GREEN; 
         computerScore++;
         computerScoreLabel.textContent = "Score: " + computerScore;
     }
@@ -63,14 +63,45 @@ function startRound(playerChoice){
         computerPanel.firstChild.remove();
         if (playerScore === 5){
             playerPanel.textContent = "PLAYER HAS WON!";
+            computerPanel.textContent = "PLAY AGAIN?";
+            computerPanel.addEventListener("click", restartGame);
         }
         else{
             computerPanel.textContent = "COMPUTER HAS WON!";
+            playerPanel.textContent = "PLAY AGAIN?"
+            playerPanel.addEventListener("click", restartGame);
         }
+        optionButtons.forEach(option => {
+            option.removeEventListener("click", selectOption);
+            });
     }
 }
-let playerScore = 0;
-let computerScore = 0;
+function restartGame(){
+    console.log("Restarting...");
+    startGame();
+    computerPanel.removeEventListener("click", restartGame);
+    playerPanel.removeEventListener("click", restartGame);
+}
+function startGame(){
+    playerScore = 0;
+    computerScore = 0;
+    playerPanel.firstChild.remove();
+    computerPanel.firstChild.remove();
+    playerPanel.textContent = "?";
+    computerPanel.textContent = "?";
+    statePlayer.textContent = "Choosing...";
+    stateComputer.textContent = "Choosing...";
+    playerScoreLabel.textContent = "Score: " + playerScore;
+    computerScoreLabel.textContent = "Score: " + computerScore;
+    optionButtons.forEach(option => {
+        option.addEventListener("click", selectOption);
+    });
+}
+const GREEN = "#a7ef9a";//   CBFFA9
+const RED = "#FF9B9B"; //
+const ORANGE = "#FFEAA7"; //FFBB64
+let playerScore;
+let computerScore;
 const optionButtons = document.querySelectorAll(".selection-list li");
 const playerSection = document.querySelector(".player-section");
 const computerSection = document.querySelector(".computer-section");
@@ -80,11 +111,9 @@ const statePlayer = document.querySelector(".player-section .state");
 const stateComputer = document.querySelector(".computer-section .state");
 const playerScoreLabel = document.querySelector(".player-score"); 
 const computerScoreLabel = document.querySelector(".computer-score"); 
-optionButtons.forEach(option => {
-    option.addEventListener("click", (event) => {
-        const playerChoice = getChoiceCode(event.currentTarget.className);
-        startRound(playerChoice);
-    })
-});
-
+const selectOption = (event) => {
+    const playerChoice = getChoiceCode(event.currentTarget.className);
+    startRound(playerChoice);
+};
+startGame();
 

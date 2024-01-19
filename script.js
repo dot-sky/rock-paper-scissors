@@ -65,13 +65,16 @@ function startRound(playerChoice){
             playerPanel.textContent = "PLAYER HAS WON!";
             computerPanel.textContent = "PLAY AGAIN?";
             computerSection.style.backgroundColor = GREY;
-            computerPanel.addEventListener("click", restartGame);
+            stateComputer.textContent = "Click!";
+            computerSection.addEventListener("click", restartGame);
         }
         else{
             computerPanel.textContent = "COMPUTER HAS WON!";
             playerPanel.textContent = "PLAY AGAIN?"
             playerSection.style.backgroundColor = GREY;
-            playerPanel.addEventListener("click", restartGame);
+            statePlayer.textContent = "Click! ";
+
+            playerSection.addEventListener("click", restartGame);
         }
         optionButtons.forEach(option => {
             option.removeEventListener("click", selectOption);
@@ -81,8 +84,8 @@ function startRound(playerChoice){
 function restartGame(){
     console.log("Restarting...");
     startGame();
-    computerPanel.removeEventListener("click", restartGame);
-    playerPanel.removeEventListener("click", restartGame);
+    computerSection.removeEventListener("click", restartGame);
+    playerSection.removeEventListener("click", restartGame);
 }
 function startGame(){
     playerScore = 0;

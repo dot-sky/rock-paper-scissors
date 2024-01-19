@@ -6,13 +6,13 @@ function displayChoice(playerPanel, option){
     const imgOption = document.createElement("img");
     switch(option){
         case 0:
-            imgOption.src = "img/rock-128.png";
+            imgOption.src = "img/rock-256.png";
             break;
         case 1:
-            imgOption.src = "img/paper-s.png";
+            imgOption.src = "img/paper-256.png";
             break;
         case 2: 
-            imgOption.src = "img/scissors-128.png";
+            imgOption.src = "img/scissors-256.png";
             break;
     }
     imgOption.classList.add("img-display-large");
@@ -64,11 +64,13 @@ function startRound(playerChoice){
         if (playerScore === 5){
             playerPanel.textContent = "PLAYER HAS WON!";
             computerPanel.textContent = "PLAY AGAIN?";
+            computerSection.style.backgroundColor = GREY;
             computerPanel.addEventListener("click", restartGame);
         }
         else{
             computerPanel.textContent = "COMPUTER HAS WON!";
             playerPanel.textContent = "PLAY AGAIN?"
+            playerSection.style.backgroundColor = GREY;
             playerPanel.addEventListener("click", restartGame);
         }
         optionButtons.forEach(option => {
@@ -87,19 +89,23 @@ function startGame(){
     computerScore = 0;
     playerPanel.firstChild.remove();
     computerPanel.firstChild.remove();
-    playerPanel.textContent = "?";
-    computerPanel.textContent = "?";
-    statePlayer.textContent = "Choosing...";
-    stateComputer.textContent = "Choosing...";
+    playerSection.style.backgroundColor = ORANGE;
+    computerSection.style.backgroundColor = ORANGE;
+    playerPanel.textContent = "? Choosing...";
+    computerPanel.textContent = "? Choosing...";
+    statePlayer.textContent = "PLAYER";
+    stateComputer.textContent = "COMPUTER";
     playerScoreLabel.textContent = "Score: " + playerScore;
     computerScoreLabel.textContent = "Score: " + computerScore;
     optionButtons.forEach(option => {
         option.addEventListener("click", selectOption);
     });
 }
-const GREEN = "#a7ef9a";//   CBFFA9
-const RED = "#FF9B9B"; //
-const ORANGE = "#FFEAA7"; //FFBB64
+const GREEN = "#a7ef9a";
+const RED = "#FF9B9B"; 
+const ORANGE = "#f8e196"; 
+const YELLOW = "#FFFEC4";
+const GREY = "#A9A9A9";
 let playerScore;
 let computerScore;
 const optionButtons = document.querySelectorAll(".selection-list li");

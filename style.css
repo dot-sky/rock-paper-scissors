@@ -75,7 +75,8 @@ li img{
     height: 64px;
 }
 .unfocused-text{
-    font-size: 32px;
+    font-size: 48px;
     font-weight: 700;
-    color: rgb(105, 105, 105);
+    color: rgb(243, 243, 243);
+    text-align: center;
 }

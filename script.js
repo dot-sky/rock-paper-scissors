@@ -90,7 +90,6 @@ function game(){
 
 
 function displayChoice(playerPanel, option){
-    console.log(option);
     const imgOption = document.createElement("img");
     switch(option){
         case 0:
@@ -123,16 +122,36 @@ function getChoiceCode(choice){
 }
 function startRound(playerChoice){
     const computerChoice = getRandomNumber(2);
-    console.log("Computer: " + computerChoice);
     displayChoice(computerPanel, computerChoice);
+    displayChoice(playerPanel, playerChoice);
+    if (playerChoice === computerChoice){
+        statePlayer.textContent = "DRAW";
+        stateComputer.textContent = "DRAW";
+        playerSection.style.cssText = "background-color: rgb(147, 151, 230)"; 
+        computerSection.style.cssText = "background-color: rgb(166, 161, 243)";
+    }
+    else if (playerChoice-1 === computerChoice || playerChoice === 0 && computerChoice === 2){
+        statePlayer.textContent = "WIN";
+        stateComputer.textContent = "LOSE";
+        playerSection.style.cssText = "background-color: rgb(151, 228, 142)"; 
+        computerSection.style.cssText = "background-color: rgb(228, 142, 142)";
+    }else{
+        statePlayer.textContent = "LOSE";
+        stateComputer.textContent = "WIN";
+        playerSection.style.cssText = "background-color: rgb(228, 142, 142)"; 
+        computerSection.style.cssText = "background-color: rgb(151, 228, 142)"; 
+    }
 }
 const optionButtons = document.querySelectorAll(".selection-list li");
+const playerSection = document.querySelector(".player-section");
+const computerSection = document.querySelector(".computer-section");
 const playerPanel = document.querySelector(".player-choice");
 const computerPanel = document.querySelector(".computer-choice");
+const statePlayer = document.querySelector(".player-section .state");
+const stateComputer = document.querySelector(".computer-section .state");
 optionButtons.forEach(option => {
     option.addEventListener("click", (event) => {
         const playerChoice = getChoiceCode(event.currentTarget.className);
-        displayChoice(playerPanel, playerChoice);
         startRound(playerChoice);
     })
 });
